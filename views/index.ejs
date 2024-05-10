@@ -9,10 +9,10 @@
   <body>
     <div class="container">
       <div class="left">
-        <img onload="console.log(imageUrl)" src="<%= imageUrl %>" alt="" />
+        <img onload="console.log(imageUrl)" src="<%= imageUrl %>" alt="img" />
       </div>
       <div class="right">
-        <form action="">
+        <form action="/find" method="post">
           <select name="category" id="category">
             <option value="waifu">Waifu</option>
             <option value="neko">Neko</option>
