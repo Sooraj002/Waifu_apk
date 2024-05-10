@@ -9,10 +9,10 @@
   <body>
     <div class="container">
       <div class="left">
-        <img onload="console.log(imageUrl)" src="<%= imageUrl %>" alt="img" />
+        <img  src="<%= imageUrl %>" alt="img" />
       </div>
       <div class="right">
-        <form action="/find" method="post">
+        <form action="/home" method="post">
           <select name="category" id="category">
             <option value="waifu">Waifu</option>
             <option value="neko">Neko</option>
@@ -46,17 +46,13 @@
             <option value="dance">Dance</option>
             <option value="cringe">Cringe</option>
           </select>
+          <button id="next-btn">Next</button>
         </form>
         <br /><br /><br />
-        <button id="next-btn">Next</button>
       </div>
     </div>
     <script>
-      const btn = document.getElementById("next-btn");
-      btn.addEventListener("click", () => {
-        console.log("clicked");
-        window.location.reload();
-      });
+
     </script>
   </body>
 </html>
