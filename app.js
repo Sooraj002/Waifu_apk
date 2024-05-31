@@ -1,3 +1,5 @@
+// app.js
+
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -9,6 +11,12 @@ app.set("views", path.join(__dirname, "views"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
+
 app.get("/", (req, res) => {
   res.send("Hi, I am root");
 });
@@ -19,8 +27,11 @@ app.get("/home", (req, res) => {
 
 app.post("/home", (req, res) => {
   const category = req.body.category;
-  const apiUrl = `https://api.waifu.pics/sfw/${category}`;
-  // const apiUrl = `https://api.waifu.pics/${type}/${categoru}`;
+  const type = req.body.type;
+
+  // Add validation for category and type
+
+  const apiUrl = `https://api.waifu.pics/${type}/${category}`;
 
   fetch(apiUrl)
     .then((response) => {
@@ -35,8 +46,9 @@ app.post("/home", (req, res) => {
     })
     .catch((error) => {
       console.error("There was a problem with the fetch operation:", error);
+      // Send an appropriate response back to the client
+      res.status(500).send("Error fetching image from API");
     });
-  // res.send("code");
 });
 
 app.listen(3000, () => {
